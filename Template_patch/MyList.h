@@ -18,8 +18,8 @@ public:
 
 	void insert(MyIterator<T>* _ptrCurrentIterator, T _tValue);
 	void erase(T _tVvalue);
-	void RemoveAt(int _iIndex);
-	// todo : InsertAt, Remove, Swap, Sort(*method)
+	//void RemoveAt(int _iIndex);
+	// todo : InsertAt, Swap, Sort(*method)
 };
 
 

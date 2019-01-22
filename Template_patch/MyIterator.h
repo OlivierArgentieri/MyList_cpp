@@ -13,7 +13,8 @@ private:
 public:
 	MyIterator<T>& operator++();
 	MyIterator<T>& operator--();
-	MyIterator<T>& operator[](int _iIndex);
+	MyIterator<T>& operator[](unsigned int _iIndex);
+	void reset();
 };
 
 template <typename T>
@@ -30,22 +31,48 @@ MyIterator<T>& MyIterator<T>::operator++()
 		this->m_ptr_my_node_ = this->m_ptr_my_node_->m_next_ptr_;
 		return *this;
 	}
+	this->m_ptr_my_node_ = nullptr;
+	return *this;
+	
 }
 
 template <typename T>
 MyIterator<T>& MyIterator<T>::operator--()
 {
-	if (this->m_ptr_my_node_ != nullptr && this->m_ptr_my_node_->m_previous_ptr_!= nullptr)
+	if (this->m_ptr_my_node_ != nullptr && this->m_ptr_my_node_->m_previous_ptr_ != nullptr)
 	{
 		this->m_ptr_my_node_ = this->m_ptr_my_node_->m_previous_ptr_;
-		return this;
+		return *this;
 	}
+	return *this;
 }
 
 template <typename T>
-MyIterator<T>& MyIterator<T>::operator[](int _iIndex)
+MyIterator<T>& MyIterator<T>::operator[](unsigned int _iIndex)
 {
+	this->reset();
+	int i = 0;
+	for (; i< _iIndex && this->m_ptr_my_node_ !=nullptr; i++)
+	{
+		this->operator++();
+	}
 
+	if (this->m_ptr_my_node_ == nullptr)
+		this->reset();
+
+	return *this;
+}
+
+template <typename T>
+void MyIterator<T>::reset()
+{
+	if (this->m_ptr_my_node_ == nullptr)
+		return;
+
+	while (this->m_ptr_my_node_->m_previous_ptr_ != nullptr)
+	{
+		this->operator--();
+	}
 }
 
 template <typename T>
