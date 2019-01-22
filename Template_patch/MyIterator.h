@@ -13,6 +13,7 @@ private:
 public:
 	MyIterator<T>& operator++();
 	MyIterator<T>& operator--();
+	MyIterator<T>& operator[](int _iIndex);
 };
 
 template <typename T>
@@ -41,6 +42,11 @@ MyIterator<T>& MyIterator<T>::operator--()
 	}
 }
 
+template <typename T>
+MyIterator<T>& MyIterator<T>::operator[](int _iIndex)
+{
+
+}
 
 template <typename T>
 void MyIterator<T>::add_to_previous(MyIterator<T> *_ptrCurrentIterator, MyNode<T> *_ptrNewNode)
