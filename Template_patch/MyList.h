@@ -15,7 +15,7 @@ public:
 	unsigned int get_size();
 	MyIterator<T> begin();
 	MyIterator<T> last();
-
+	void pop_back();
 
 	void insert(MyIterator<T>* _ptrCurrentIterator, T _tValue);
 	void erase(T _tVvalue);
@@ -103,6 +103,22 @@ template <typename T>
 MyIterator<T> MyList<T>::last()
 {
 	return MyIterator<T>(this->get_last_ptr());
+}
+
+template <typename T>
+void MyList<T>::pop_back()
+{
+	if (this->get_size() < 1)
+		return;
+
+	if (this->get_size() == 1)
+		this->m_ptr_head_ = nullptr;
+	else
+	{
+		auto temp = this->get_last_ptr();
+		temp->m_previous_ptr_->m_next_ptr_ = nullptr;
+		delete(temp);
+	}
 }
 
 template <typename T>
