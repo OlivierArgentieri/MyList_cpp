@@ -1,0 +1,3 @@
+﻿  Template_patch.cpp
+i:\objectif3d\1ere année\c++\template_patch\template_patch\template_patch\myiterator.h(32): warning C4715: 'MyIterator<int>::operator++': not all control paths return a value
+  Template_patch.vcxproj -> I:\Objectif3D\1ere année\C++\Template_patch\Template_patch\x64\Debug\Template_patch.exe

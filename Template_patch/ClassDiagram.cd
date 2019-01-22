@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MyNode&lt;T&gt;">
+    <Position X="4.75" Y="0.5" Width="2" />
+    <AssociationLine Name="m_next_value_" Type="MyNode&lt;T&gt;">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.192" Y="0.279" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="m_previous_value_" Type="MyNode&lt;T&gt;">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.255" Y="0.289" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAQAAAAAAAAgAAAAAAAQAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>MyNode.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="m_next_value_" />
+      <Field Name="m_previous_value_" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MyIterator&lt;T&gt;">
+    <Position X="1.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAQAEAAAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>MyIterator.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="m_ptr_my_node_" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="IEnumerator&lt;T&gt;">
+    <Position X="12.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IEnumerator.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyList&lt;T&gt;">
+    <Position X="8.5" Y="0.5" Width="1.5" />
+    <AssociationLine Name="m_ptr_head_" Type="MyNode&lt;T&gt;" FixedToPoint="true">
+      <Path>
+        <Point X="8.5" Y="1.25" />
+        <Point X="6.75" Y="1.25" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAQAEAAAAQAAAAAEAAAAAAAAAAEgA=</HashCode>
+      <FileName>MyList.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="m_ptr_head_" />
+    </ShowAsAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
