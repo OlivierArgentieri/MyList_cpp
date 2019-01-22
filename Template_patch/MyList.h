@@ -13,8 +13,9 @@ public:
 	MyList<T>();
 	void push_back(T _type);
 	unsigned int get_size();
-	MyIterator<T>* begin();
-	MyIterator<T>* last();
+	MyIterator<T> begin();
+	MyIterator<T> last();
+
 
 	void insert(MyIterator<T>* _ptrCurrentIterator, T _tValue);
 	void erase(T _tVvalue);
@@ -93,15 +94,15 @@ unsigned MyList<T>::get_size()
 }
 
 template <typename T>
-MyIterator<T>* MyList<T>::begin()
+MyIterator<T> MyList<T>::begin()
 {
-	return new MyIterator<T>(m_ptr_head_);
+	return MyIterator<T>(m_ptr_head_);
 }
 
 template <typename T>
-MyIterator<T>* MyList<T>::last()
+MyIterator<T> MyList<T>::last()
 {
-	return new MyIterator<T>(this->get_last_ptr());
+	return MyIterator<T>(this->get_last_ptr());
 }
 
 template <typename T>
