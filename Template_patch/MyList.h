@@ -8,7 +8,7 @@ class MyList
 private:
 	MyNode<T>* m_ptr_head_;
 	MyNode<T>* get_last_ptr();
-
+	MyNode<T>* find_by_value(T _tVvalue);
 public:
 	MyList<T>();
 	void push_back(T _type);
@@ -35,6 +35,24 @@ MyNode<T>* MyList<T>::get_last_ptr()
 		temp->m_ptr_head_ = temp->m_ptr_head_->m_next_ptr_;
 	}
 	return temp->m_ptr_head_;
+}
+
+template <typename T>
+MyNode<T>* MyList<T>::find_by_value(T _tVvalue)
+{
+	bool finish = false;
+
+	auto temp = this->m_ptr_head_;
+	while (!finish && !(temp->m_type_value_ == _tVvalue))
+	{
+		temp = temp->m_next_ptr_;
+		finish = temp == nullptr;
+	}
+	if (!finish)
+		return temp;
+
+	return nullptr;
+
 }
 
 template <typename T>
@@ -99,17 +117,9 @@ void MyList<T>::insert(MyIterator<T>* _ptrCurrentIterator, T _tValue)
 template <typename T>
 void MyList<T>::erase(T _tVvalue)
 {
-	bool finish = false;
+	MyNode<T> *temp = this->find_by_value(_tVvalue);
 
-	// todo refactor find
-	auto temp = this->m_ptr_head_;
-	while (!finish && !(temp->m_type_value_ == _tVvalue))
-	{
-		finish = temp == nullptr;
-		temp = temp->m_next_ptr_;
-	}
-
-	if (!finish)
+	if (temp != nullptr)
 	{
 		temp->m_next_ptr_->m_previous_ptr_ = temp->m_previous_ptr_;
 		temp->m_previous_ptr_->m_next_ptr_ = temp->m_next_ptr_;

@@ -13,7 +13,7 @@ private:
 public:
 	MyIterator<T>& operator++();
 	MyIterator<T>& operator--();
-	MyIterator<T>& operator[](unsigned int _iIndex);
+	MyIterator<T>& operator[](int _iIndex);
 	void reset();
 };
 
@@ -44,12 +44,15 @@ MyIterator<T>& MyIterator<T>::operator--()
 		this->m_ptr_my_node_ = this->m_ptr_my_node_->m_previous_ptr_;
 		return *this;
 	}
+	this->m_ptr_my_node_ = nullptr;
 	return *this;
 }
 
 template <typename T>
-MyIterator<T>& MyIterator<T>::operator[](unsigned int _iIndex)
+MyIterator<T>& MyIterator<T>::operator[](int _iIndex)
 {
+	if (_iIndex < 0)
+		return *this;
 	this->reset();
 	int i = 0;
 	for (; i< _iIndex && this->m_ptr_my_node_ !=nullptr; i++)
