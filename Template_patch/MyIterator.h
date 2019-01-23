@@ -11,8 +11,8 @@ private:
 	void add_to_previous(MyIterator<T>* _ptrCurrentIterator, MyNode<T>* _ptrNewNode);
 
 public:
-	MyIterator<T>& operator++(int);
-	MyIterator<T>& operator--(int);
+	MyIterator<T>& operator++();
+	MyIterator<T>& operator--();
 	T *operator*();
 	MyIterator<T>& operator[](int _iIndex);
 	void reset();
@@ -25,7 +25,7 @@ MyIterator<T>::MyIterator(MyNode<T>* _ptrMyNode)
 }
 
 template <typename T>
-MyIterator<T>& MyIterator<T>::operator++(int)
+MyIterator<T>& MyIterator<T>::operator++()
 {
 	if (this->m_ptr_my_node_ != nullptr && this->m_ptr_my_node_->m_next_ptr_ != nullptr)
 	{
@@ -37,7 +37,7 @@ MyIterator<T>& MyIterator<T>::operator++(int)
 }
 
 template <typename T>
-MyIterator<T>& MyIterator<T>::operator--(int)
+MyIterator<T>& MyIterator<T>::operator--()
 {
 	if (this->m_ptr_my_node_ != nullptr && this->m_ptr_my_node_->m_previous_ptr_ != nullptr)
 	{
@@ -63,7 +63,7 @@ MyIterator<T>& MyIterator<T>::operator[](int _iIndex)
 	int i = 0;
 	for (; i< _iIndex && this->m_ptr_my_node_ !=nullptr; i++)
 	{
-		this->operator++();
+		++*this;
 	}
 
 	if (this->m_ptr_my_node_ == nullptr)
@@ -80,7 +80,7 @@ void MyIterator<T>::reset()
 
 	while (this->m_ptr_my_node_->m_previous_ptr_ != nullptr)
 	{
-		this->operator--();
+		--*this;
 	}
 }
 
