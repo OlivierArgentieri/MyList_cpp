@@ -19,6 +19,7 @@ public:
 
 	void insert(MyIterator<T>* _ptrCurrentIterator, T _tValue);
 	void erase(T _tVvalue);
+	void clear();
 	//void RemoveAt(int _iIndex);
 	// todo : InsertAt, Swap, Sort(*method)
 };
@@ -53,7 +54,6 @@ MyNode<T>* MyList<T>::find_by_value(T _tVvalue)
 		return temp;
 
 	return nullptr;
-
 }
 
 template <typename T>
@@ -134,12 +134,21 @@ void MyList<T>::insert(MyIterator<T>* _ptrCurrentIterator, T _tValue)
 template <typename T>
 void MyList<T>::erase(T _tVvalue)
 {
-	MyNode<T> *temp = this->find_by_value(_tVvalue);
+	MyNode<T>* temp = this->find_by_value(_tVvalue);
 
 	if (temp != nullptr)
 	{
 		temp->m_next_ptr_->m_previous_ptr_ = temp->m_previous_ptr_;
 		temp->m_previous_ptr_->m_next_ptr_ = temp->m_next_ptr_;
 		delete(temp);
+	}
+}
+
+template <typename T>
+void MyList<T>::clear()
+{
+	for (int i = this->get_size(); i >= 0; i--)
+	{
+		this->pop_back();
 	}
 }
