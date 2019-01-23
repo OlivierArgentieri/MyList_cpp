@@ -12,6 +12,7 @@ private:
 public:
 	MyList<T>();
 	void push_back(T _type);
+	void push_front(T _type);
 	unsigned int get_size();
 	MyIterator<T> begin();
 	MyIterator<T> last();
@@ -21,6 +22,9 @@ public:
 	void erase(T _tVvalue);
 	void remove(T _tValue);
 	void clear();
+
+
+
 	//void RemoveAt(int _iIndex);
 	// todo : InsertAt, Swap, Sort(*method)
 };
@@ -40,6 +44,8 @@ MyNode<T>* MyList<T>::get_last_ptr()
 	return temp->m_ptr_head_;
 }
 
+// return pointer of node for value in parameters
+// return null if not found
 template <typename T>
 MyNode<T>* MyList<T>::find_by_value(T _tVvalue)
 {
@@ -63,6 +69,8 @@ MyList<T>::MyList()
 	this->m_ptr_head_ = nullptr;
 }
 
+
+//add element to back
 template <typename T>
 void MyList<T>::push_back(T _type)
 {
@@ -80,6 +88,21 @@ void MyList<T>::push_back(T _type)
 }
 
 template <typename T>
+void MyList<T>::push_front(T _type)
+{
+	if(this->m_ptr_head_ == nullptr)
+		this->m_ptr_head_ = new MyNode<T>(_type);
+	else
+	{
+		auto temp = new MyNode<T>(_type);
+		temp->m_next_ptr_ = this->m_ptr_head_;
+		this->m_ptr_head_->m_previous_ptr_ = temp;
+		this->m_ptr_head_ = temp;
+	}
+}
+
+// get size of list
+template <typename T>
 unsigned MyList<T>::get_size()
 {
 	if (this->m_ptr_head_ == nullptr)
@@ -94,18 +117,21 @@ unsigned MyList<T>::get_size()
 	return i;
 }
 
+// get an iterator on first element
 template <typename T>
 MyIterator<T> MyList<T>::begin()
 {
 	return MyIterator<T>(m_ptr_head_);
 }
 
+// get an iterator on last element
 template <typename T>
 MyIterator<T> MyList<T>::last()
 {
 	return MyIterator<T>(this->get_last_ptr());
 }
 
+// remove last element 
 template <typename T>
 void MyList<T>::pop_back()
 {
@@ -122,6 +148,7 @@ void MyList<T>::pop_back()
 	}
 }
 
+// Insert value at postion of iterator
 template <typename T>
 void MyList<T>::insert(MyIterator<T>* _ptrCurrentIterator, T _tValue)
 {
@@ -167,6 +194,7 @@ void MyList<T>::remove(T _tValue)
 	}
 }
 
+// Remove all element in current list
 template <typename T>
 void MyList<T>::clear()
 {
