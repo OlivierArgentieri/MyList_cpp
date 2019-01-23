@@ -19,6 +19,7 @@ public:
 
 	void insert(MyIterator<T>* _ptrCurrentIterator, T _tValue);
 	void erase(T _tVvalue);
+	void remove(T _tValue);
 	void clear();
 	//void RemoveAt(int _iIndex);
 	// todo : InsertAt, Swap, Sort(*method)
@@ -130,7 +131,7 @@ void MyList<T>::insert(MyIterator<T>* _ptrCurrentIterator, T _tValue)
 	MyNode<T>* newChainon = new MyNode<T>(_tValue);
 	_ptrCurrentIterator->add_to_previous(_ptrCurrentIterator, newChainon);
 }
-
+// Erase one value
 template <typename T>
 void MyList<T>::erase(T _tVvalue)
 {
@@ -138,9 +139,31 @@ void MyList<T>::erase(T _tVvalue)
 
 	if (temp != nullptr)
 	{
-		temp->m_next_ptr_->m_previous_ptr_ = temp->m_previous_ptr_;
-		temp->m_previous_ptr_->m_next_ptr_ = temp->m_next_ptr_;
+		if (temp->m_previous_ptr_ == nullptr)
+		{
+			this->m_ptr_head_ = temp->m_next_ptr_;
+		}
+		else if(temp->m_previous_ptr_!=nullptr)
+		{
+			temp->m_previous_ptr_->m_next_ptr_ = temp->m_next_ptr_;
+		}
+		if (temp->m_next_ptr_ != nullptr)
+		{
+			temp->m_next_ptr_->m_previous_ptr_ = temp->m_previous_ptr_;
+		}
 		delete(temp);
+	}
+}
+
+// Remove all value 
+template <typename T>
+void MyList<T>::remove(T _tValue)
+{
+	auto temp = this->find_by_value(_tValue);
+	while (temp != nullptr)
+	{
+		this->erase(_tValue);
+		temp = this->find_by_value(_tValue);
 	}
 }
 
