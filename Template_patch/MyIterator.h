@@ -8,7 +8,7 @@ class MyIterator
 private:
 	MyNode<T>* m_ptr_my_node_;
 	MyIterator<T>(MyNode<T>* _ptrMyNode);
-	void add_to_previous(MyIterator<T>* _ptrCurrentIterator, MyNode<T>* _ptrNewNode);
+	void add_to_previous(MyIterator<T> _CurrentIterator, MyNode<T>* _ptrNewNode);
 
 public:
 	MyIterator<T>& operator++();
@@ -85,19 +85,19 @@ void MyIterator<T>::reset()
 }
 
 template <typename T>
-void MyIterator<T>::add_to_previous(MyIterator<T> *_ptrCurrentIterator, MyNode<T> *_ptrNewNode)
+void MyIterator<T>::add_to_previous(MyIterator<T> _CurrentIterator, MyNode<T> *_ptrNewNode)
 {
-	if (_ptrCurrentIterator != nullptr && _ptrCurrentIterator->m_ptr_my_node_->m_previous_ptr_ != nullptr)
+	if (_CurrentIterator.m_ptr_my_node_->m_previous_ptr_ != nullptr)
 	{
-		_ptrNewNode->m_previous_ptr_ = _ptrCurrentIterator->m_ptr_my_node_->m_previous_ptr_;
+		_ptrNewNode->m_previous_ptr_ = _CurrentIterator.m_ptr_my_node_->m_previous_ptr_;
 		_ptrNewNode->m_previous_ptr_->m_next_ptr_ = _ptrNewNode;
-		_ptrCurrentIterator->m_ptr_my_node_->m_previous_ptr_ = _ptrNewNode;
-		_ptrNewNode->m_next_ptr_ = _ptrCurrentIterator->m_ptr_my_node_;
+		_CurrentIterator.m_ptr_my_node_->m_previous_ptr_ = _ptrNewNode;
+		_ptrNewNode->m_next_ptr_ = _CurrentIterator.m_ptr_my_node_;
 	}
 	else
 	{
 		_ptrNewNode->m_previous_ptr_ = nullptr;
-		_ptrCurrentIterator->m_ptr_my_node_->m_previous_ptr_ = _ptrNewNode;
-		_ptrNewNode->m_next_ptr_ = _ptrCurrentIterator->m_ptr_my_node_;
+		_CurrentIterator.m_ptr_my_node_->m_previous_ptr_ = _ptrNewNode;
+		_ptrNewNode->m_next_ptr_ = _CurrentIterator.m_ptr_my_node_;
 	}
 }

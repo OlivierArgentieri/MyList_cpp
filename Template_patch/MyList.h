@@ -38,7 +38,7 @@ public:
 	void pop_front();
 
 	// Insert value at position of iterator
-	void insert(MyIterator<T>* _ptrCurrentIterator, T _tValue);
+	void insert(MyIterator<T> CurrentIterator, T _tValue);
 
 	// Erase one value
 	void erase(T _tVvalue);
@@ -187,13 +187,10 @@ void MyList<T>::pop_front()
 }
 
 template <typename T>
-void MyList<T>::insert(MyIterator<T>* _ptrCurrentIterator, T _tValue)
+void MyList<T>::insert(MyIterator<T> _CurrentIterator, T _tValue)
 {
-	if (_ptrCurrentIterator == nullptr)
-		return;
-
 	MyNode<T>* newChainon = new MyNode<T>(_tValue);
-	_ptrCurrentIterator->add_to_previous(_ptrCurrentIterator, newChainon);
+	_CurrentIterator.add_to_previous(_CurrentIterator, newChainon);
 
 }
 
