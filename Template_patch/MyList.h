@@ -49,11 +49,11 @@ public:
 	// Remove all element in current list
 	void clear();
 
-	// Swap 2 list
+	// Swap 2 items
 	void swap(MyIterator<T> _it1, MyIterator<T> _it2);
 
 	//void RemoveAt(int _iIndex);
-	// todo : InsertAt, Swap, Sort(*method)
+	// todo : Sort(*method)
 };
 
 
