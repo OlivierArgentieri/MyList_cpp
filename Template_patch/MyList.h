@@ -49,7 +49,8 @@ public:
 	// Remove all element in current list
 	void clear();
 
-
+	// Swap 2 list
+	void swap(MyIterator<T> _it1, MyIterator<T> _it2);
 
 	//void RemoveAt(int _iIndex);
 	// todo : InsertAt, Swap, Sort(*method)
@@ -237,4 +238,18 @@ void MyList<T>::clear()
 	{
 		this->pop_back();
 	}
+}
+
+template <typename T>
+void MyList<T>::swap(MyIterator<T> _it1, MyIterator<T> _it2)
+{
+	if (_it1.m_ptr_my_node_ == nullptr || _it2.m_ptr_my_node_ == nullptr)
+		return;
+
+	MyNode<T> *temp = (MyNode<T>*) malloc(sizeof(MyNode<T>*));
+
+	memmove(temp, _it1.m_ptr_my_node_, sizeof(MyNode<T>*));
+	memmove(_it1.m_ptr_my_node_, _it2.m_ptr_my_node_, sizeof(MyNode<T>*));
+	memmove(_it2.m_ptr_my_node_, temp, sizeof(MyNode<T>*)); 
+	free(temp);
 }
