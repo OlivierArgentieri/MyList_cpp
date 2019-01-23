@@ -6,6 +6,10 @@
       <HashCode>AAAACAAAQAAAAAAAAgAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
       <FileName>MyNode.h</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="m_next_ptr_" />
+      <Field Name="m_previous_ptr_" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="MyIterator&lt;T&gt;">
     <Position X="1.25" Y="0.5" Width="2" />
@@ -21,12 +25,12 @@
     <Position X="8.5" Y="0.5" Width="1.5" />
     <AssociationLine Name="m_ptr_head_" Type="MyNode&lt;T&gt;" FixedToPoint="true">
       <Path>
-        <Point X="8.5" Y="1.182" />
-        <Point X="6.75" Y="1.182" />
+        <Point X="8.5" Y="1.047" />
+        <Point X="6.75" Y="1.047" />
       </Path>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAgAAAAAABAAAAAQAEIAAAQAAAAAEAAAAAAAAAAEgA=</HashCode>
+      <HashCode>AEAgACAAAABAgAAEQAEIAAAQAAAAAEAAAAEAAAAAEgQ=</HashCode>
       <FileName>MyList.h</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>

@@ -33,7 +33,6 @@ MyIterator<T>& MyIterator<T>::operator++()
 	}
 	this->m_ptr_my_node_ = nullptr;
 	return *this;
-	
 }
 
 template <typename T>

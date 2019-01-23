@@ -8,20 +8,45 @@ class MyList
 private:
 	MyNode<T>* m_ptr_head_;
 	MyNode<T>* get_last_ptr();
+
+
+	// return pointer of node for value in parameters
+	// return null if not found
 	MyNode<T>* find_by_value(T _tVvalue);
 public:
 	MyList<T>();
+
+	//add element to end of list 
 	void push_back(T _type);
+
+	//add element to front of list
 	void push_front(T _type);
+
+	// get size of list
 	unsigned int get_size();
+
+	// get an iterator on first element
 	MyIterator<T> begin();
+
+	// get an iterator on last element
 	MyIterator<T> last();
+
+	// remove last element 
 	void pop_back();
+
+	// remove first element
 	void pop_front();
 
+	// Insert value at position of iterator
 	void insert(MyIterator<T>* _ptrCurrentIterator, T _tValue);
+
+	// Erase one value
 	void erase(T _tVvalue);
+
+	// Remove all value match with parameters
 	void remove(T _tValue);
+
+	// Remove all element in current list
 	void clear();
 
 
@@ -45,8 +70,6 @@ MyNode<T>* MyList<T>::get_last_ptr()
 	return temp->m_ptr_head_;
 }
 
-// return pointer of node for value in parameters
-// return null if not found
 template <typename T>
 MyNode<T>* MyList<T>::find_by_value(T _tVvalue)
 {
@@ -71,7 +94,6 @@ MyList<T>::MyList()
 }
 
 
-//add element to back
 template <typename T>
 void MyList<T>::push_back(T _type)
 {
@@ -102,7 +124,6 @@ void MyList<T>::push_front(T _type)
 	}
 }
 
-// get size of list
 template <typename T>
 unsigned MyList<T>::get_size()
 {
@@ -118,21 +139,18 @@ unsigned MyList<T>::get_size()
 	return i;
 }
 
-// get an iterator on first element
 template <typename T>
 MyIterator<T> MyList<T>::begin()
 {
 	return MyIterator<T>(m_ptr_head_);
 }
 
-// get an iterator on last element
 template <typename T>
 MyIterator<T> MyList<T>::last()
 {
 	return MyIterator<T>(this->get_last_ptr());
 }
 
-// remove last element 
 template <typename T>
 void MyList<T>::pop_back()
 {
@@ -149,7 +167,6 @@ void MyList<T>::pop_back()
 	}
 }
 
-// remove first element
 template <typename T>
 void MyList<T>::pop_front()
 {
@@ -168,7 +185,6 @@ void MyList<T>::pop_front()
 	delete(temp);
 }
 
-// Insert value at postion of iterator
 template <typename T>
 void MyList<T>::insert(MyIterator<T>* _ptrCurrentIterator, T _tValue)
 {
@@ -177,8 +193,9 @@ void MyList<T>::insert(MyIterator<T>* _ptrCurrentIterator, T _tValue)
 
 	MyNode<T>* newChainon = new MyNode<T>(_tValue);
 	_ptrCurrentIterator->add_to_previous(_ptrCurrentIterator, newChainon);
+
 }
-// Erase one value
+
 template <typename T>
 void MyList<T>::erase(T _tVvalue)
 {
@@ -202,7 +219,6 @@ void MyList<T>::erase(T _tVvalue)
 	}
 }
 
-// Remove all value 
 template <typename T>
 void MyList<T>::remove(T _tValue)
 {
@@ -214,7 +230,6 @@ void MyList<T>::remove(T _tValue)
 	}
 }
 
-// Remove all element in current list
 template <typename T>
 void MyList<T>::clear()
 {
