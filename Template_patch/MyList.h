@@ -17,6 +17,7 @@ public:
 	MyIterator<T> begin();
 	MyIterator<T> last();
 	void pop_back();
+	void pop_front();
 
 	void insert(MyIterator<T>* _ptrCurrentIterator, T _tValue);
 	void erase(T _tVvalue);
@@ -146,6 +147,25 @@ void MyList<T>::pop_back()
 		temp->m_previous_ptr_->m_next_ptr_ = nullptr;
 		delete(temp);
 	}
+}
+
+// remove first element
+template <typename T>
+void MyList<T>::pop_front()
+{
+	if (this->m_ptr_head_ == nullptr)
+		return;
+
+	if (this->m_ptr_head_->m_next_ptr_ == nullptr)
+	{
+		this->m_ptr_head_ = nullptr;
+		return;
+	}
+	auto temp = this->m_ptr_head_;
+	this->m_ptr_head_ = temp->m_next_ptr_;
+	this->m_ptr_head_->m_previous_ptr_ = nullptr;
+
+	delete(temp);
 }
 
 // Insert value at postion of iterator
