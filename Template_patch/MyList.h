@@ -242,14 +242,17 @@ void MyList<T>::swap(MyIterator<T> _it1, MyIterator<T> _it2)
 	if (_it1.m_ptr_my_node_ == nullptr || _it2.m_ptr_my_node_ == nullptr)
 		return;
 
-	/*
-	MyNode<T> *temp = (MyNode<T>*) malloc(sizeof(MyNode<T
-	memmove(temp, _it1.m_ptr_my_node_, sizeof(MyNode<T>*));
-	memmove(_it1.m_ptr_my_node_, _it2.m_ptr_my_node_, sizeof(MyNode<T>*));
-	memmove(_it2.m_ptr_my_node_, temp, sizeof(MyNode<T>*)); 
-	free(temp);*/
+	
+	MyNode<T> *temp = new MyNode<T>();
+	memmove(temp, _it1.m_ptr_my_node_, sizeof(MyNode<T>));
+	memmove(_it1.m_ptr_my_node_, _it2.m_ptr_my_node_, sizeof(MyNode<T>));
+	memmove(_it2.m_ptr_my_node_, temp, sizeof(MyNode<T>)); 
 
+	delete temp;
+
+	/*
 	auto temp = _it1.m_ptr_my_node_->m_type_value_;
 	_it1.m_ptr_my_node_->m_type_value_ = _it2.m_ptr_my_node_->m_type_value_;
 	_it2.m_ptr_my_node_->m_type_value_= temp;
+	*/
 }

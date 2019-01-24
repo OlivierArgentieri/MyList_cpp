@@ -57,6 +57,8 @@ T* MyIterator<T>::operator*()
 template <typename T>
 MyIterator<T>& MyIterator<T>::operator[](int _iIndex)
 {
+	auto temp = this->m_ptr_my_node_;
+	
 	if (_iIndex < 0)
 		return *this;
 	this->reset();
@@ -67,7 +69,7 @@ MyIterator<T>& MyIterator<T>::operator[](int _iIndex)
 	}
 
 	if (this->m_ptr_my_node_ == nullptr)
-		this->reset();
+		this->m_ptr_my_node_ = temp;
 
 	return *this;
 }
