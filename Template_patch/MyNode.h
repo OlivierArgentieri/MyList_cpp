@@ -9,10 +9,9 @@ private:
 	T m_type_value_;
 	MyNode<T> *m_next_ptr_;
 	MyNode<T> *m_previous_ptr_;
+	MyNode();
 public:
 	MyNode(T _tValue);
-	MyNode();
-	~MyNode();
 };
 
 template <typename T>
@@ -29,11 +28,4 @@ MyNode<T>::MyNode()
 	//this->m_type_value_ = nullptr;
 	this->m_next_ptr_ = nullptr;
 	this->m_previous_ptr_ = nullptr;
-}
-
-template <typename T>
-MyNode<T>::~MyNode()
-{
-	delete this->m_next_ptr_;
-	delete this->m_previous_ptr_;
 }

@@ -52,6 +52,10 @@ public:
 	// Swap 2 items
 	void swap(MyIterator<T> _it1, MyIterator<T> _it2);
 
+	// return element at index 
+	// null if index out of range
+	T element_at(int _iIndex);
+
 	//void RemoveAt(int _iIndex);
 	// todo : Sort(*method)
 };
@@ -114,7 +118,7 @@ void MyList<T>::push_back(T _type)
 template <typename T>
 void MyList<T>::push_front(T _type)
 {
-	if(this->m_ptr_head_ == nullptr)
+	if (this->m_ptr_head_ == nullptr)
 		this->m_ptr_head_ = new MyNode<T>(_type);
 	else
 	{
@@ -204,7 +208,7 @@ void MyList<T>::erase(T _tVvalue)
 		{
 			this->m_ptr_head_ = temp->m_next_ptr_;
 		}
-		else if(temp->m_previous_ptr_!=nullptr)
+		else if (temp->m_previous_ptr_ != nullptr)
 		{
 			temp->m_previous_ptr_->m_next_ptr_ = temp->m_next_ptr_;
 		}
@@ -242,17 +246,27 @@ void MyList<T>::swap(MyIterator<T> _it1, MyIterator<T> _it2)
 	if (_it1.m_ptr_my_node_ == nullptr || _it2.m_ptr_my_node_ == nullptr)
 		return;
 
-	
-	MyNode<T> *temp = new MyNode<T>();
+	MyNode<T>* temp = new MyNode<T>();
 	memmove(temp, _it1.m_ptr_my_node_, sizeof(MyNode<T>));
 	memmove(_it1.m_ptr_my_node_, _it2.m_ptr_my_node_, sizeof(MyNode<T>));
-	memmove(_it2.m_ptr_my_node_, temp, sizeof(MyNode<T>)); 
-
+	memmove(_it2.m_ptr_my_node_, temp, sizeof(MyNode<T>));
 	delete temp;
+}
 
-	/*
-	auto temp = _it1.m_ptr_my_node_->m_type_value_;
-	_it1.m_ptr_my_node_->m_type_value_ = _it2.m_ptr_my_node_->m_type_value_;
-	_it2.m_ptr_my_node_->m_type_value_= temp;
-	*/
+
+template <typename T>
+T MyList<T>::element_at(int _iIndex)
+{
+	int size = this->get_size();
+	if (_iIndex >= size || _iIndex < 0)
+		return nullptr;
+
+
+	auto temp = this->m_ptr_head_;
+	for (int i = 0; i < _iIndex; i++)
+	{
+		temp = temp->m_next_ptr_;
+	}
+
+	return temp->m_type_value_;
 }

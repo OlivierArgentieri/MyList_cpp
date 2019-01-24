@@ -13,8 +13,8 @@ private:
 public:
 	MyIterator<T>& operator++();
 	MyIterator<T>& operator--();
-	T *operator*();
-	MyIterator<T>& operator[](int _iIndex);
+	T& operator*();
+	MyIterator<T>& element_at(int _iIndex);
 	void reset();
 };
 
@@ -49,26 +49,24 @@ MyIterator<T>& MyIterator<T>::operator--()
 }
 
 template <typename T>
-T* MyIterator<T>::operator*()
+T& MyIterator<T>::operator*()
 {
 	try
 	{
 		if (this->m_ptr_my_node_ == nullptr)
 			throw std::exception("List empty or null");
-
 	}
 	catch (const std::exception& e)
 	{
 		std::cerr << "Error occured: " << e.what() << std::endl;
 	}
 	
-	return &this->m_ptr_my_node_->m_type_value_;
+	return this->m_ptr_my_node_->m_type_value_;
 }
 
 template <typename T>
-MyIterator<T>& MyIterator<T>::operator[](int _iIndex)
+MyIterator<T>& MyIterator<T>::element_at(int _iIndex)
 {
-	// todo error car peut retourner un objet avec pointeur null
 	try
 	{
 		if (this->m_ptr_my_node_ == nullptr)
