@@ -51,12 +51,16 @@ MyIterator<T>& MyIterator<T>::operator--()
 template <typename T>
 T* MyIterator<T>::operator*()
 {
+	if (this->m_ptr_my_node_ == nullptr)
+		return nullptr;
+
 	return &this->m_ptr_my_node_->m_type_value_;
 }
 
 template <typename T>
 MyIterator<T>& MyIterator<T>::operator[](int _iIndex)
 {
+	// todo error car peut retourner un objet avec pointeur null
 	auto temp = this->m_ptr_my_node_;
 	
 	if (_iIndex < 0)
