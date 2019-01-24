@@ -51,9 +51,17 @@ MyIterator<T>& MyIterator<T>::operator--()
 template <typename T>
 T* MyIterator<T>::operator*()
 {
-	if (this->m_ptr_my_node_ == nullptr)
-		return nullptr;
+	try
+	{
+		if (this->m_ptr_my_node_ == nullptr)
+			throw std::exception("List empty or null");
 
+	}
+	catch (const std::exception& e)
+	{
+		std::cerr << "Error occured: " << e.what() << std::endl;
+	}
+	
 	return &this->m_ptr_my_node_->m_type_value_;
 }
 
@@ -61,6 +69,17 @@ template <typename T>
 MyIterator<T>& MyIterator<T>::operator[](int _iIndex)
 {
 	// todo error car peut retourner un objet avec pointeur null
+	try
+	{
+		if (this->m_ptr_my_node_ == nullptr)
+			throw std::exception("Iterator created with a null or empty list !");
+
+	}
+	catch (const std::exception& e)
+	{
+		std::cerr << "Error occured: " << e.what() << std::endl;
+	}
+	
 	auto temp = this->m_ptr_my_node_;
 	
 	if (_iIndex < 0)
