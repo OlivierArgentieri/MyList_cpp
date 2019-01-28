@@ -259,8 +259,11 @@ T MyList<T>::element_at(int _iIndex)
 {
 	int size = this->get_size();
 	if (_iIndex >= size || _iIndex < 0)
+	{
+		throw new std::out_of_range("Error MyList::element_at() : index out of range");
 		return nullptr;
-
+	}
+		
 
 	auto temp = this->m_ptr_head_;
 	for (int i = 0; i < _iIndex; i++)

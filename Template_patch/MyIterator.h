@@ -51,40 +51,28 @@ MyIterator<T>& MyIterator<T>::operator--()
 template <typename T>
 T& MyIterator<T>::operator*()
 {
-	try
-	{
-		if (this->m_ptr_my_node_ == nullptr)
-			throw std::exception("List empty or null");
-	}
-	catch (const std::exception& e)
-	{
-		std::cerr << "Error occured: " << e.what() << std::endl;
-	}
-	
+	if (this->m_ptr_my_node_ == nullptr)
+		throw std::exception("List empty or null");
+
+
 	return this->m_ptr_my_node_->m_type_value_;
 }
 
 template <typename T>
 MyIterator<T>& MyIterator<T>::element_at(int _iIndex)
 {
-	try
-	{
-		if (this->m_ptr_my_node_ == nullptr)
-			throw std::exception("Iterator created with a null or empty list !");
+	if (this->m_ptr_my_node_ == nullptr)
+		throw std::exception("List empty or null");
 
-	}
-	catch (const std::exception& e)
-	{
-		std::cerr << "Error occured: " << e.what() << std::endl;
-	}
-	
+
+
 	auto temp = this->m_ptr_my_node_;
-	
+
 	if (_iIndex < 0)
 		return *this;
 	this->reset();
 	int i = 0;
-	for (; i< _iIndex && this->m_ptr_my_node_ !=nullptr; i++)
+	for (; i < _iIndex && this->m_ptr_my_node_ != nullptr; i++)
 	{
 		++*this;
 	}
