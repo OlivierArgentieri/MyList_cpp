@@ -195,6 +195,9 @@ void MyList<T>::insert(MyIterator<T> _CurrentIterator, T _tValue)
 {
 	MyNode<T>* newChainon = new MyNode<T>(_tValue);
 	_CurrentIterator.add_to_previous(_CurrentIterator, newChainon);
+
+	if (_CurrentIterator.m_ptr_my_node_ == this->m_ptr_head_)
+		this->m_ptr_head_ = newChainon;
 }
 
 template <typename T>

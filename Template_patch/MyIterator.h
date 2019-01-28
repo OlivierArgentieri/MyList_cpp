@@ -110,5 +110,6 @@ void MyIterator<T>::add_to_previous(MyIterator<T> _CurrentIterator, MyNode<T> *_
 		_ptrNewNode->m_previous_ptr_ = nullptr;
 		_CurrentIterator.m_ptr_my_node_->m_previous_ptr_ = _ptrNewNode;
 		_ptrNewNode->m_next_ptr_ = _CurrentIterator.m_ptr_my_node_;
+
 	}
 }
