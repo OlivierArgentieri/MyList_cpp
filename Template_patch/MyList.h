@@ -30,6 +30,7 @@ public:
 
 	// get an iterator on last element
 	MyIterator<T> last();
+	MyIterator<T> end();
 
 	// remove last element 
 	void pop_back();
@@ -102,22 +103,15 @@ MyList<T>::MyList()
 template <typename T>
 void MyList<T>::push_back(T _type)
 {
-	if (this->m_ptr_head_ == nullptr)
-	{
-		this->m_ptr_head_ = new MyNode<T>(_type);
-	}
-	else
-	{
-		auto temp = new MyNode<T>(_type);
-		auto temp_prev = this->get_last_ptr();
-		temp->m_previous_ptr_ = temp_prev;
-		temp_prev->m_next_ptr_ = temp;
-	}
+	insert(this->end(), _type);
 }
 
 template <typename T>
 void MyList<T>::push_front(T _type)
 {
+	insert(this->begin(), _type);
+	
+	/*
 	if (this->m_ptr_head_ == nullptr)
 		this->m_ptr_head_ = new MyNode<T>(_type);
 	else
@@ -126,7 +120,7 @@ void MyList<T>::push_front(T _type)
 		temp->m_next_ptr_ = this->m_ptr_head_;
 		this->m_ptr_head_->m_previous_ptr_ = temp;
 		this->m_ptr_head_ = temp;
-	}
+	}*/
 }
 
 template <typename T>
@@ -154,6 +148,14 @@ template <typename T>
 MyIterator<T> MyList<T>::last()
 {
 	return MyIterator<T>(this->get_last_ptr());
+}
+
+template <typename T>
+MyIterator<T> MyList<T>::end()
+{
+	MyIterator<T> it = MyIterator<T>(nullptr);
+	return it;
+
 }
 
 template <typename T>
@@ -194,10 +196,26 @@ template <typename T>
 void MyList<T>::insert(MyIterator<T> _CurrentIterator, T _tValue)
 {
 	MyNode<T>* newChainon = new MyNode<T>(_tValue);
-	_CurrentIterator.add_to_previous(_CurrentIterator, newChainon);
 
-	if (_CurrentIterator.m_ptr_my_node_ == this->m_ptr_head_)
+	if(this->m_ptr_head_ == nullptr)
 		this->m_ptr_head_ = newChainon;
+
+	else if(_CurrentIterator.m_ptr_my_node_ == nullptr)
+	{
+		auto temp = new MyNode<T>(_tValue);
+		auto temp_prev = this->get_last_ptr();
+		temp->m_previous_ptr_ = temp_prev;
+		temp_prev->m_next_ptr_ = temp;
+	}
+	else if (_CurrentIterator.m_ptr_my_node_ == this->m_ptr_head_)
+	{
+		auto temp = new MyNode<T>(_tValue);
+		temp->m_next_ptr_ = this->m_ptr_head_;
+		this->m_ptr_head_->m_previous_ptr_ = temp;
+		this->m_ptr_head_ = temp;
+	}
+	else
+		_CurrentIterator.add_to_previous(_CurrentIterator, newChainon);
 }
 
 template <typename T>
@@ -272,7 +290,6 @@ T MyList<T>::element_at(int _iIndex)
 		return nullptr;
 	}
 		
-
 	auto temp = this->m_ptr_head_;
 	for (int i = 0; i < _iIndex; i++)
 	{

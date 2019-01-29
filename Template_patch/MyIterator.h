@@ -3,7 +3,8 @@
 template <typename T>
 class MyIterator
 {
-	template<typename T> friend class MyList;
+	template <typename T>
+	friend class MyList;
 
 private:
 	MyNode<T>* m_ptr_my_node_;
@@ -14,6 +15,7 @@ public:
 	MyIterator<T>& operator++();
 	MyIterator<T>& operator--();
 	T& operator*();
+	bool operator!=(MyIterator<T> _ptrIterator);
 	MyIterator<T>& element_at(int _iIndex);
 	void reset();
 };
@@ -27,13 +29,12 @@ MyIterator<T>::MyIterator(MyNode<T>* _ptrMyNode)
 template <typename T>
 MyIterator<T>& MyIterator<T>::operator++()
 {
-	if (this->m_ptr_my_node_ != nullptr && this->m_ptr_my_node_->m_next_ptr_ != nullptr)
+	if (this->m_ptr_my_node_ != nullptr)
 	{
 		this->m_ptr_my_node_ = this->m_ptr_my_node_->m_next_ptr_;
 		return *this;
 	}
-	this->m_ptr_my_node_ = nullptr;
-	return *this;
+	throw new std::out_of_range("index out of range");
 }
 
 template <typename T>
@@ -54,8 +55,14 @@ T& MyIterator<T>::operator*()
 	if (this->m_ptr_my_node_ == nullptr)
 		throw std::exception("List empty or null");
 
+	if (this->m_ptr_my_node_ != nullptr)
+		return this->m_ptr_my_node_->m_type_value_;
+}
 
-	return this->m_ptr_my_node_->m_type_value_;
+template <typename T>
+bool MyIterator<T>::operator!=(MyIterator<T> _ptrIterator)
+{
+	return _ptrIterator.m_ptr_my_node_ != this->m_ptr_my_node_;
 }
 
 template <typename T>
@@ -63,7 +70,6 @@ MyIterator<T>& MyIterator<T>::element_at(int _iIndex)
 {
 	if (this->m_ptr_my_node_ == nullptr)
 		throw std::exception("List empty or null");
-
 
 
 	auto temp = this->m_ptr_my_node_;
@@ -96,7 +102,7 @@ void MyIterator<T>::reset()
 }
 
 template <typename T>
-void MyIterator<T>::add_to_previous(MyIterator<T> _CurrentIterator, MyNode<T> *_ptrNewNode)
+void MyIterator<T>::add_to_previous(MyIterator<T> _CurrentIterator, MyNode<T>* _ptrNewNode)
 {
 	if (_CurrentIterator.m_ptr_my_node_->m_previous_ptr_ != nullptr)
 	{
@@ -110,6 +116,5 @@ void MyIterator<T>::add_to_previous(MyIterator<T> _CurrentIterator, MyNode<T> *_
 		_ptrNewNode->m_previous_ptr_ = nullptr;
 		_CurrentIterator.m_ptr_my_node_->m_previous_ptr_ = _ptrNewNode;
 		_ptrNewNode->m_next_ptr_ = _CurrentIterator.m_ptr_my_node_;
-
 	}
 }
