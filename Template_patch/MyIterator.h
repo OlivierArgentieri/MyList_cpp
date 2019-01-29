@@ -46,16 +46,16 @@ MyIterator<T>& MyIterator<T>::operator--()
 		return *this;
 	}
 	this->m_ptr_my_node_ = nullptr;
-	return *this;
+	return *&MyIterator<T>(nullptr);
 }
 
 template <typename T>
 T& MyIterator<T>::operator*()
 {
 	if (this->m_ptr_my_node_ == nullptr)
-		throw std::exception("List empty or null");
-
-	if (this->m_ptr_my_node_ != nullptr)
+	{
+		throw new std::out_of_range("List empty or null");
+	}
 		return this->m_ptr_my_node_->m_type_value_;
 }
 

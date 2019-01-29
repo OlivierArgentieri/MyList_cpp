@@ -42,7 +42,7 @@ public:
 	void insert(MyIterator<T> CurrentIterator, T _tValue);
 
 	// Erase one value
-	void erase(T _tVvalue);
+	MyIterator<T> erase(MyIterator<T> _it);
 
 	// Remove all value match with parameters
 	void remove(T _tValue);
@@ -219,12 +219,13 @@ void MyList<T>::insert(MyIterator<T> _CurrentIterator, T _tValue)
 }
 
 template <typename T>
-void MyList<T>::erase(T _tVvalue)
+MyIterator<T> MyList<T>::erase(MyIterator<T> _it)
 {
-	MyNode<T>* temp = this->find_by_value(_tVvalue);
-
+	MyNode<T>* temp = this->find_by_value(*_it);
+	
 	if (temp != nullptr)
 	{
+		auto p_next_it = ++_it;
 		if (temp->m_previous_ptr_ == nullptr)
 		{
 			this->m_ptr_head_ = temp->m_next_ptr_;
@@ -237,8 +238,12 @@ void MyList<T>::erase(T _tVvalue)
 		{
 			temp->m_next_ptr_->m_previous_ptr_ = temp->m_previous_ptr_;
 		}
+		
 		delete(temp);
+		return p_next_it;
+	
 	}
+	return MyIterator<T>(nullptr);
 }
 
 template <typename T>
@@ -247,7 +252,7 @@ void MyList<T>::remove(T _tValue)
 	auto temp = this->find_by_value(_tValue);
 	while (temp != nullptr)
 	{
-		this->erase(_tValue);
+		this->erase();
 		temp = this->find_by_value(_tValue);
 	}
 }
