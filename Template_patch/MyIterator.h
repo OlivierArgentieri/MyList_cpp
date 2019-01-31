@@ -46,7 +46,7 @@ MyIterator<T>& MyIterator<T>::operator--()
 		return *this;
 	}
 	this->m_ptr_my_node_ = nullptr;
-	return *&MyIterator<T>(nullptr);
+	return MyIterator<T>(nullptr);
 }
 
 template <typename T>
