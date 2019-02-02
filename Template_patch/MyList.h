@@ -135,6 +135,7 @@ unsigned MyList<T>::get_size()
 	{
 		temp->m_ptr_head_ = temp->m_ptr_head_->m_next_ptr_;
 	}
+	delete(temp);
 	return i;
 }
 
